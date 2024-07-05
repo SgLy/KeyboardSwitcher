@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Keyboard Switcher</string>
+    <string name="tile_name">SwitchKeyboard</string>
+</resources>
