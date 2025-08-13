@@ -39,7 +39,7 @@ class SwitchKeyboardActivity : Activity() {
                 val nextIndex = (currentIndex + 1) % ids.size
                 val nextId = ids[nextIndex]
                 Settings.Secure.putString(
-                    getContentResolver(),
+                    contentResolver,
                     Settings.Secure.DEFAULT_INPUT_METHOD,
                     nextId
                 )
@@ -86,7 +86,7 @@ class SwitchKeyboardActivity : Activity() {
                 Log.d("KeyboardSwitcher", "Try granting direct switch permission by Shizuku")
 
                 val packageName = getPackageName()
-                val command = "pm grant $packageName ${permission}"
+                val command = "pm grant $packageName $permission"
                 val process = Shizuku.newProcess(arrayOf("sh", "-c", command), null, null)
                 process.waitFor()
 
