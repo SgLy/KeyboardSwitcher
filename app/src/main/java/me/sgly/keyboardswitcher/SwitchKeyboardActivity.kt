@@ -35,6 +35,7 @@ class SwitchKeyboardActivity : Activity() {
         this.tryObtainSystemPermission(Manifest.permission.WRITE_SECURE_SETTINGS, { hasPermission ->
             if (hasPermission) {
                 val currentId = im.currentInputMethodInfo?.id
+                val currentName = im.currentInputMethodInfo?.loadLabel(packageManager)
                 val currentIndex = ids.indexOf(currentId)
                 val nextIndex = (currentIndex + 1) % ids.size
                 val nextId = ids[nextIndex]
@@ -43,7 +44,8 @@ class SwitchKeyboardActivity : Activity() {
                     Settings.Secure.DEFAULT_INPUT_METHOD,
                     nextId
                 )
-                Toast.makeText(applicationContext, "Switched to $nextId", Toast.LENGTH_LONG).show()
+                val nextName = im.currentInputMethodInfo?.loadLabel(packageManager)
+                Toast.makeText(applicationContext, "$currentName -> $nextName", Toast.LENGTH_LONG).show()
                 finish()
             } else {
                 val handler = Handler(Looper.getMainLooper())
