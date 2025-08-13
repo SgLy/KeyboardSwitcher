@@ -26,6 +26,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -33,4 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+dependencies {
+    val shizuku_version = "13.1.0"
+    implementation("dev.rikka.shizuku:api:$shizuku_version")
+    implementation("dev.rikka.shizuku:provider:${shizuku_version}")
 }
