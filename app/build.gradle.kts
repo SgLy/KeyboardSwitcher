@@ -36,7 +36,7 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -58,3 +58,4 @@ dependencies {
     implementation("dev.rikka.shizuku:api:$shizuku_version")
     implementation("dev.rikka.shizuku:provider:${shizuku_version}")
 }
+
