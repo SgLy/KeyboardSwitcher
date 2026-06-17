@@ -106,12 +106,13 @@ class SwitchKeyboardActivity : Activity() {
             Log.d(TAG, "save lastId=$fromId")
         }
 
+        val fromName = inputMethodManager.currentInputMethodInfo?.loadLabel(packageManager)
+        val toName = imeLabelMap[targetId] ?: targetId
+
         Log.d(TAG, "switch to $targetId")
         Settings.Secure.putString(contentResolver, Settings.Secure.DEFAULT_INPUT_METHOD, targetId)
 
-        val fromName = inputMethodManager.currentInputMethodInfo?.loadLabel(packageManager)
-        val toName = imeLabelMap[targetId] ?: targetId
-        Toast.makeText(applicationContext, "$fromName -> $toName", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, "$fromName -> $toName", Toast.LENGTH_SHORT).show()
         finish()
     }
 
