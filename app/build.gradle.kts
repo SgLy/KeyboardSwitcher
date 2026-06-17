@@ -1,13 +1,6 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-}
-
-val localProperties = Properties().apply {
-    val localFile = rootProject.file("local.properties")
-    if (localFile.exists()) load(localFile.inputStream())
 }
 
 android {
@@ -16,10 +9,20 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(localProperties.getProperty("RELEASE_STORE_FILE") ?: "C:/Users/SgLy/sgly-android.jks")
-            storePassword = localProperties.getProperty("RELEASE_STORE_PASSWORD") ?: ""
-            keyAlias = localProperties.getProperty("RELEASE_KEY_ALIAS") ?: ""
-            keyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD") ?: ""
+            storeFile = rootProject.file("release.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("KEYSTORE_ALIAS") ?: "keyboardswitcher"
+            keyPassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+        }
+    }
+
+    
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("x86_64", "arm64-v8a", "armeabi-v7a")
+            isUniversalApk = false
         }
     }
 
